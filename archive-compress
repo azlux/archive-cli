@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+# check is programm is installed
+function check {
+    if ! foobar_loc="$(type -p "$1")" || [[ -z $foobar_loc ]]; then
+        echo "$1 isn't installed."
+        exit 0
+    fi
+}
+
+function ask_extension() {
+    read -p "Enter extension: " ext </dev/tty
+    extension="${ext}"
+    case "${ext}" in
+        "tar" ) check "tar" && tar cf `basename ${1}`.tar ${1} ;;
+        "tar.gz" | "tgz" ) check "tar" && tar cfz `basename ${1}`.tar.gz ${1} ;;
+        "tar.bz2" | "tbz2" ) check "tar" && tar jcf `basename ${1}`.tar.bz2 ${1} ;;
+        "tar.xz" ) check "tar" && tar Jcf `basename ${1}`.tar.xz ${1};;
+        "tar.Z" | "taz" ) check "tar" && tar cfZ `basename ${1}`.tar.Z ${1};;
+        "zip" ) check "zip" && zip -r `basename ${1}`.zip ${1};;
+        "xz" ) check "xz" && xz -k $1 ;;
+        * ) echo "unsupported extension" && exit 1 ;;
+    esac
+    exit 0
+}
+
+function print_help(){
+    echo -e "Usage: archive-compress [OPTION]... FILE/FOLDER [DESTINATION]"
+    echo -e "Mandatory arguments :"
+    echo -e "  FILE/FOLDER Specify the file or the folder to compress"
+    echo -e "Optionals arguments :"
+    echo -e "  [-a] requests the desired extension"
+    echo -e "  [-h] print current help"
+    echo -e "  DESTINATION Specify the destination name (with the extension)"
+    exit 0
+}
+
+while getopts ah option; do
+    case "${option}" in
+        h) print_help ;;
+        a) shift $((OPTIND-1)) && ask_extension $@ ;;
+        *) ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
+tar czf `basename ${1}`.tar.gz ${1}

@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# check is programm is installed
+function check {
+    if ! foobar_loc="$(type -p "$1")" || [[ -z $foobar_loc ]]; then
+        echo "$1 isn't installed."
+    fi
+}
+
+if [ -f $1 ]; 
+then
+	file=$1
+	case $1 in
+		*.tar.bz2) check "tar" && tar xjf $file;;
+		*.tar.xz) check "tar" && tar -xf $file;;
+		*.tar.gz) check "tar" && tar xzf $file;;
+		*.zip) check "unzip" && unzip $file;;
+		*.rar) check "rar" && rar x $file;;
+		*.tar) check "tar" && tar xf $file;;
+		*.tgz) check "tar" && tar xzf $file;;
+		*.gz) check "gunzip" && gunzip $file;;
+		*.bz2) check "bunzip2" && bunzip2 $file;;
+		*.jar) check "jar" && jar xvf $file;;
+		*.xz) check "xz" && xz -d $file;;
+		*.Z) check "uncompress" && uncompress $file;;
+		*) echo "Not a valid compressed file";;
+	esac
+
+else
+    echo "Not a valid file"
+fi
