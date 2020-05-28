@@ -22,7 +22,7 @@ new=$(echo $api | grep -Po '"tag_name": "\K.*?(?=")')
 rm -rf "$DESTDIR" "$OUTDIR"
 
 # archive-cli
-install -Dm 755 "$STARTDIR/archive-compress" "$DESTDIR/usr/bin/archive-compress"
+install -Dm 755 "$STARTDIR/archive-create" "$DESTDIR/usr/bin/archive-create"
 install -Dm 755 "$STARTDIR/archive-extract" "$DESTDIR/usr/bin/archive-extract"
 
 
