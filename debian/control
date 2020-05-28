@@ -1,0 +1,10 @@
+Package: archive-cli
+Version: VERSION-TO-REPLACE
+Section: net
+Priority: optional
+Architecture: all
+Depends: bash
+Maintainer: Azlux <github@azlux.fr>
+Description: extract/compress easy to learn functions
+Homepage: https://github.com/azlux/archive-cli
+Bugs: https://github.com/azlux/archive-cli/issues
