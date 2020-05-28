@@ -19,6 +19,7 @@ function ask_extension() {
         "tar.Z" | "taz" ) check "tar" && tar cfZ `basename ${1}`.tar.Z ${1};;
         "zip" ) check "zip" && zip -r `basename ${1}`.zip ${1};;
         "xz" ) check "xz" && xz -k $1 ;;
+        "7z" ) check "7z" && 7z a `basename ${1}`.7z $1 ;;
         * ) echo "unsupported extension" && exit 1 ;;
     esac
     exit 0

@@ -23,6 +23,7 @@ then
 		*.jar) check "jar" && jar xvf $file;;
 		*.xz) check "xz" && xz -d $file;;
 		*.Z) check "uncompress" && uncompress $file;;
+        *.7z) check "7z" && 7z e $file;;
 		*) echo "Not a valid compressed file";;
 	esac
 
