@@ -26,7 +26,7 @@ function ask_extension() {
 }
 
 function print_help(){
-    echo -e "Usage: archive-compress [OPTION]... FILE/FOLDER [DESTINATION]"
+    echo -e "Usage: archive-create [OPTION]... FILE/FOLDER [DESTINATION]"
     echo -e "Mandatory arguments :"
     echo -e "  FILE/FOLDER Specify the file or the folder to compress"
     echo -e "Optionals arguments :"
